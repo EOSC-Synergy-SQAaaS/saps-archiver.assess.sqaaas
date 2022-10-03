@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/saps-archiver:
+      branch: develop
+      repo: https://github.com/EOSC-synergy/saps-archiver
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: 1.7.0_no_kubectl
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/EOSC-synergy/saps-archiver git:
+        commands:
+        - /usr/bin/env sh .sqa/script.snazzy-blue-cassowary.sh
+        container: qc.acc_cozy-brass-cuttlefish
+  QC.Doc:
+    repos:
+      github.com/EOSC-synergy/saps-archiver find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-cream-impala.sh
+        container: qc.doc_pokey-sapphire-crane
+      github.com/EOSC-synergy/saps-archiver git:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-olive-magpie.sh
+        container: qc.doc_chewy-tomato-nightingale
+      github.com/EOSC-synergy/saps-archiver markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wheezy-lemon-cougar.sh
+        container: qc.doc_shaggy-brass-weasel
+  QC.Lic:
+    repos:
+      github.com/EOSC-synergy/saps-archiver licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-purple-mouse.sh
+        container: qc.lic_ugly-yellow-swan
+  QC.Sec:
+    repos:
+      github.com/EOSC-synergy/saps-archiver bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-cardinal-loon.sh
+        container: qc.sec_zippy-khaki-devil
+  QC.Sty:
+    repos:
+      github.com/EOSC-synergy/saps-archiver flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-myrtle-hyena.sh
+        container: qc.sty_craggy-tomato-fossa
+  QC.Ver:
+    repos:
+      github.com/EOSC-synergy/saps-archiver get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-ultramarine-moose.sh
+        container: qc.ver_breezy-azure-tzu
+timeout: 1800
